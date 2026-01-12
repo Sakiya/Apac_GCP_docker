@@ -1,0 +1,30 @@
+.alert_success{
+	text-align: center;
+    margin: 10px;
+    font-size: 20px;
+    color: #ff5f5f;
+}
+.errorMessage{
+	color: #f55555;
+}
+span.required{
+	color: #f55555;	
+}
+
+#twzipcode .twzipcode {
+	display: inline-block;
+}
+canvas.jSignature{
+	background: rgba(79, 75, 75, 0.12) !important;
+}
+.classHate{
+	color: red;
+}
+@media (max-width:767px) { 
+	.hidden-767{
+		display: none !important;
+	}
+	canvas.jSignature{
+		height: 400px !important;
+	}
+}

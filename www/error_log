@@ -1,0 +1,40 @@
+[04-Jan-2025 09:07:18 America/Chicago] PHP Warning:  require_once(/home2/juso1326/website/onetaipeiair/www/../yii-PHP8.1/framework/yii.php): failed to open stream: No such file or directory in /home2/juso1326/website/onetaipeiair/www/index.php on line 12
+[04-Jan-2025 09:07:18 America/Chicago] PHP Fatal error:  require_once(): Failed opening required '/home2/juso1326/website/onetaipeiair/www/../yii-PHP8.1/framework/yii.php' (include_path='.:/opt/cpanel/ea-php70/root/usr/share/pear') in /home2/juso1326/website/onetaipeiair/www/index.php on line 12
+[04-Jan-2025 09:07:43 America/Chicago] PHP Warning:  require_once(/home2/juso1326/website/onetaipeiair/www/../yii-PHP8.1/framework/yii.php): Failed to open stream: No such file or directory in /home2/juso1326/website/onetaipeiair/www/index.php on line 12
+[04-Jan-2025 09:07:43 America/Chicago] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/juso1326/website/onetaipeiair/www/../yii-PHP8.1/framework/yii.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home2/juso1326/website/onetaipeiair/www/index.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/juso1326/website/onetaipeiair/www/index.php on line 12
+[04-Jan-2025 09:07:43 America/Chicago] PHP Warning:  require_once(/home2/juso1326/website/onetaipeiair/www/../yii-PHP8.1/framework/yii.php): Failed to open stream: No such file or directory in /home2/juso1326/website/onetaipeiair/www/index.php on line 12
+[04-Jan-2025 09:07:43 America/Chicago] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/juso1326/website/onetaipeiair/www/../yii-PHP8.1/framework/yii.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home2/juso1326/website/onetaipeiair/www/index.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/juso1326/website/onetaipeiair/www/index.php on line 12
+[04-Jan-2025 09:08:45 America/Chicago] PHP Warning:  require_once(/home2/juso1326/website/onetaipeiair/www/../yii-PHP8.1/framework/yii.php): Failed to open stream: No such file or directory in /home2/juso1326/website/onetaipeiair/www/index.php on line 12
+[04-Jan-2025 09:08:45 America/Chicago] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/juso1326/website/onetaipeiair/www/../yii-PHP8.1/framework/yii.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home2/juso1326/website/onetaipeiair/www/index.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/juso1326/website/onetaipeiair/www/index.php on line 12
+[04-Jan-2025 09:08:52 America/Chicago] PHP Warning:  require_once(/home2/juso1326/website/onetaipeiair/www/../yii-PHP8.1/framework/yii.php): Failed to open stream: No such file or directory in /home2/juso1326/website/onetaipeiair/www/index.php on line 12
+[04-Jan-2025 09:08:52 America/Chicago] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/juso1326/website/onetaipeiair/www/../yii-PHP8.1/framework/yii.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home2/juso1326/website/onetaipeiair/www/index.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/juso1326/website/onetaipeiair/www/index.php on line 12
+[04-Jan-2025 09:08:53 America/Chicago] PHP Warning:  require_once(/home2/juso1326/website/onetaipeiair/www/../yii-PHP8.1/framework/yii.php): Failed to open stream: No such file or directory in /home2/juso1326/website/onetaipeiair/www/index.php on line 12
+[04-Jan-2025 09:08:53 America/Chicago] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/juso1326/website/onetaipeiair/www/../yii-PHP8.1/framework/yii.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home2/juso1326/website/onetaipeiair/www/index.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/juso1326/website/onetaipeiair/www/index.php on line 12
+[04-Jan-2025 09:08:53 America/Chicago] PHP Warning:  require_once(/home2/juso1326/website/onetaipeiair/www/../yii-PHP8.1/framework/yii.php): Failed to open stream: No such file or directory in /home2/juso1326/website/onetaipeiair/www/index.php on line 12
+[04-Jan-2025 09:08:53 America/Chicago] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/juso1326/website/onetaipeiair/www/../yii-PHP8.1/framework/yii.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home2/juso1326/website/onetaipeiair/www/index.php:12
+Stack trace:
+#0 {main}
+  thrown in /home2/juso1326/website/onetaipeiair/www/index.php on line 12
+[12-Aug-2025 23:39:36 Asia/Taipei] PHP Warning:  Undefined array key "en_EN" in /home2/juso1326/website/onetaipeiair/www/protected/components/Controller.php on line 293
+[12-Aug-2025 23:39:36 Asia/Taipei] PHP Warning:  Undefined array key "" in /home2/juso1326/website/onetaipeiair/www/protected/components/Controller.php on line 293
+[12-Aug-2025 23:39:36 Asia/Taipei] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/juso1326/website/onetaipeiair/www/protected/components/Controller.php on line 293
+[12-Aug-2025 23:39:36 Asia/Taipei] PHP Warning:  Undefined array key "en_EN" in /home2/juso1326/website/onetaipeiair/www/protected/views/layouts/main.php on line 35
+[12-Aug-2025 23:39:36 Asia/Taipei] PHP Warning:  Undefined array key "en_EN" in /home2/juso1326/website/onetaipeiair/www/protected/components/Controller.php on line 293
+[12-Aug-2025 23:39:36 Asia/Taipei] PHP Warning:  Undefined array key "" in /home2/juso1326/website/onetaipeiair/www/protected/components/Controller.php on line 293
+[12-Aug-2025 23:39:36 Asia/Taipei] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/juso1326/website/onetaipeiair/www/protected/components/Controller.php on line 293
+[12-Aug-2025 23:39:36 Asia/Taipei] PHP Warning:  Undefined array key "en_EN" in /home2/juso1326/website/onetaipeiair/www/protected/views/layouts/main.php on line 35

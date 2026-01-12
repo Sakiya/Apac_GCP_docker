@@ -1,0 +1,50 @@
+name: Deploy to GCP VM
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to VM via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.GCP_VM_HOST }}      # GCP VM 的 IP
+          username: ${{ secrets.GCP_VM_USER }}  # SSH 使用者名稱
+          key: ${{ secrets.GCP_VM_SSH_KEY }}    # SSH 私鑰 (PEM 格式)
+          port: 22
+          script: |
+            # 1. 進入專案目錄 (請確保此目錄在 VM 上已預先建立並 clone)
+            cd /var/www/oat_docker
+
+            # 2. 拉取最新程式碼
+            git pull origin main
+
+            # 3. 重建 .env 檔案 (從 GitHub Secrets 注入機敏資訊)
+            # 這樣可以確保 VM 上的密碼永遠與 GitHub Secrets 同步
+            echo "DB_HOST=db" > .env
+            echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
+            echo "DB_USER=${{ secrets.DB_USER }}" >> .env
+            echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+            echo "DB_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }}" >> .env
+            echo "YII_DEBUG=false" >> .env
+            echo "YII_TRACE_LEVEL=0" >> .env
+            echo "GII_PASSWORD=${{ secrets.GII_PASSWORD }}" >> .env
+            echo "SMTP_HOST=${{ secrets.SMTP_HOST }}" >> .env
+            echo "SMTP_PORT=${{ secrets.SMTP_PORT }}" >> .env
+            echo "SMTP_USER=${{ secrets.SMTP_USER }}" >> .env
+            echo "SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}" >> .env
+
+            # 4. 重啟容器
+            # 使用 sudo 是因為通常 docker 需要 root 權限，除非已將 user 加入 docker group
+            docker-compose down
+            docker-compose up -d --build
+            
+            # 5. 清理舊的無用映像檔 (釋放空間)
+            docker image prune -f

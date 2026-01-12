@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  # Nginx Reverse Proxy (New Service)
+  nginx:
+    image: nginx:alpine
+    container_name: oat_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - web
+    networks:
+      - oat-network
+
+  web:
+    build: .
+    container_name: oat_web
+    expose:
+      - "80"
+    # ports:  <-- Remove or change this if you want all traffic to go through Nginx
+    #   - "8080:80" 
+    volumes:
+      - .:/var/www/html
+      - ./logs/apache:/var/log/apache2
+    environment:
+      - DB_HOST=db
+      - DB_NAME=juso1326_ota
+      - DB_USER=juso1326_work
+      - DB_PASSWORD=4a0zZvV-bnk+
+    depends_on:
+      - db
+    networks:
+      - oat-network
+
+  db:
+    image: mysql:5.7
+    container_name: oat_db
+    ports:
+      - "3307:3306"
+    command: --log-error=/var/log/mysql/error.log --general-log=1 --general-log-file=/var/log/mysql/general.log
+    environment:
+      - MYSQL_DATABASE=juso1326_ota
+      - MYSQL_USER=juso1326_work
+      - MYSQL_PASSWORD=4a0zZvV-bnk+
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./juso1326_ota.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./logs/mysql:/var/log/mysql
+    networks:
+      - oat-network
+    platform: linux/amd64
+
+networks:
+  oat-network:
+    driver: bridge
+
+volumes:
+  db_data:

@@ -1,0 +1,128 @@
+    /* 工作時間 */
+
+    .en .img-format {
+        background: url(../img/_sample/uploadImage_en.svg);
+    }
+
+    .en .logoutTime .logout-btn {
+        width: 83px;
+        height: 28px;
+        background: url(../img/_sample/sign_out_en.svg);
+    }
+
+    .en .left-menu .menu-top h4 {
+        text-align: center;
+        font-size: 15px;
+    }
+
+    .en .left-menu .menu-container .menu .menu-list a {
+        padding: 6px 42px 6px 40px;
+    }
+
+    .en .left-menu .menu-container .menu .menu-list a h3 {
+        display: inline;
+        font-weight: 600;
+        font-size: 15px;
+        text-indent: -15px;
+        margin-left: -15px;
+        line-height: initial;
+    }
+
+    .en .left-menu .menu-container .menu .menu-list a h6 {
+        font-size: 12px;
+        padding-left: 0px;
+    }
+
+    .en .left-menu .menu-container .menu .menu-list a .icon {
+        position: absolute;
+        right: 17px;
+        top: 10px;
+        font-size: 14px;
+    }
+
+    .en .left-menu .menu-container .plsfill {
+        margin-bottom: 0px;
+    }
+
+    .en .left-menu .menu-container .remind {
+        font-size: 12px;
+        padding: 0px 10px 14px;
+        line-height: 16px;
+    }
+
+    /*.en .applyTable .btn-group .btn-green-border {
+        margin-top: 10px;
+    }*/
+    /* 房型選擇 */
+
+    .en .step1-container .greenbox {
+        background: #83DEC1;
+        height: auto;
+        position: relative;
+        padding-bottom: 47px;
+    }
+
+    .en .step1-container .greenbox h2 {
+        font-size: 17px;
+        margin-top: 14px;
+    }
+
+    .en .step1-container .greenbox h6 {
+        margin-top: 7px;
+        height: auto;
+        color: #666666;
+        line-height: 18px;
+    }
+
+    .en .step1-container .greenbox .checkbox {
+        padding-left: 0px;
+    }
+
+    .en .step1-container .greenbox .checkbox.checkbox-custom {
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+    }
+
+    .en .step2-container [class^=whitebox] h3 {
+        font-size: 17px;
+        padding-top: 3px;
+        padding-bottom: 12px;
+        height: 47px;
+        width: 100%;
+    }
+
+    /* 付費 */
+
+    .en #apply7 .paymentList .greenbox {
+        width: 225px;
+        /* height: 187px; */
+        background-color: #83DEC1;
+        text-align: center;
+        margin-right: 25px;
+        position: relative;
+        height: auto;
+    }
+
+    .en #apply7 .paymentList .greenbox .whiteTitle {
+        font-size: 16px;
+    }
+
+    .en #apply7 .paymentList .greenbox .whiteTitle {}
+
+    .en #apply7 .paymentList .greenbox .discrition {
+        font-size: 12px;
+        color: #235A48;
+        width: 187px;
+        height: 68px;
+        margin: 0 auto;
+        margin-top: 10px;
+        line-height: 16px;
+    }
+
+    .en #apply7 .paymentList .greenbox h2 {
+        margin-top: 23px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #000;
+    }

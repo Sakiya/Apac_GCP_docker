@@ -1,0 +1,129 @@
+	body {
+		font-size: 1.5em;
+	    line-height: 1.7em;
+	    background-color: #fff;
+	}
+	.plan_export {
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+	.page-header {
+	    border: none!important;
+	    padding-bottom: 9px;
+	    margin: 0px 0 20px;
+	    border-bottom: 1px solid #eee;
+	}
+	.page-header h4 {
+	    font-size: 24px;
+	    color: #2fb09a;
+	    line-height: 35px;
+	}
+	.reviewBox > button {
+	    margin-right: 1%;
+	    background: #eee;
+	    border: none;
+	    padding: 14px;
+	    font-weight: bold;
+	}
+	.txtBlue {
+	    color: #000976;
+	}
+	.pd0 {
+		padding: 0 !important;
+	}
+	#signatureparent {
+		margin-top: 20px;
+	    color: #000;
+	    min-height: 230px;
+	}
+	#signature p > button {
+	    color: #fff;
+	    background: #555;
+	    border: none;
+	    border-radius: 3px;
+	}
+	#signature canvas{
+		min-height: 300px !important;
+		background-color: #e0e0e0 !important;
+	}
+	
+	.companyName {
+	    text-align: center;
+	    margin-top: 15px;
+	}
+	.companyName span.logo {
+	    /*margin-top: -10px;*/
+	    width: 100px;
+	    height: auto;
+	}
+	.companyName span.logo img {
+	    width: 100%;
+	}
+	.companyName span.title {
+		padding-top: 20px;
+	    display: inline-block;
+	    font-size: 22px;
+	    font-weight: bold;
+	    line-height: 25px;
+	    text-align: center;
+	}
+	
+	.btnBox {
+	    margin-top: 5%;
+	    margin-bottom: 3%;
+	    padding-top: 5%;
+	    border-top: 1px solid #e0e0e0;
+	}
+	.btnBox button{
+	    margin-right: 80px;
+	    color: #2fb09a;
+	    background: #fff;
+	    border: 1px solid #2fb09a;
+	    border-radius: 3px;
+	    width: 180px;
+	    height: 40px;
+	    font-size: 15px;
+	    line-height: 35px;
+	    font-weight: 600;
+	}
+	
+	@media only screen and (max-width: 520px) {
+		.reserveTime {
+			margin-bottom: 10px;
+		}
+		.datebreak {
+			display: block;
+		}
+		#signature canvas{
+			min-height: 300px !important;
+		}
+		textarea, input[type=text], input[type=password], 
+		input[type=datetime], input[type=datetime-local], 
+		input[type=date], input[type=month], input[type=time], 
+		input[type=week], input[type=number], input[type=email], 
+		input[type=url], input[type=search], input[type=tel], input[type=color] {
+		    padding: 2px; 
+		    margin: 2px 0;
+		}
+	}
+	/**
+	*
+	* print
+	*
+	**/
+	@media print {
+	    .reviewBox {
+	    	display: none;
+	    }
+	    textarea, 
+	    input[type=text], input[type=password], 
+	    input[type=datetime], 
+	    input[type=datetime-local], 
+	    input[type=date], input[type=month], 
+	    input[type=time], input[type=week], 
+	    input[type=number], input[type=email], 
+	    input[type=url], input[type=search], 
+	    input[type=tel], input[type=color] {
+		    border: none !important;
+		}
+	}

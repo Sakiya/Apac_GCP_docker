@@ -1,0 +1,26 @@
+# Portainer - Docker 管理介面
+# 这是一个轻量级的 Docker UI，可以让您通过网页远程管理容器、查看 Log 和资源使用率。
+
+version: '3.8'
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: always
+    # ports:
+    #   - "9180:9000" # 已透過 Nginx 反向代理，不需對外開放
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # 允许 Portainer 控制 Docker
+      - portainer_data:/data # 持久化存储 Portainer 配置
+    networks:
+      - oat-network
+
+volumes:
+  portainer_data:
+
+
+networks:
+  oat-network:
+    external: true
+    name: oat_docker_oat-network

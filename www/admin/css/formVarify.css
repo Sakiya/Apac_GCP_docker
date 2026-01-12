@@ -1,0 +1,111 @@
+form.ng-invalid .btn-green,
+form .btn-green[disabled] {
+    pointer-events: none;
+    background-color: #777777 !important;
+    opacity: 0.25;
+}
+
+form input.ng-invalid.ng-touched,
+form textarea.ng-invalid.ng-touched,
+form select.ng-invalid.ng-touched {
+    border-color: #ff5b5b !important;
+}
+
+form input.ng-valid.ng-touched,
+form textarea.ng-valid.ng-touched,
+form select.ng-valid.ng-touched  {
+    border-color: #9B9B9B;
+}
+
+
+/* select */
+
+form select:focus {
+    outline: none;
+}
+
+form .has-error select {
+    border-color: #ff5b5b !important;
+}
+
+.parsley-errors-list.filled {
+    margin-top: -10px;
+}
+
+
+/* error 404 page */
+
+.error404 {
+    min-width: 500px;
+}
+
+.error404 img {
+    width: 150px;
+    height: auto;
+}
+
+.oops {
+    font-size: 60px;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+.error404_info {
+    font-size: 30px;
+    margin-bottom: 20px;
+    line-height: 40px;
+}
+
+.error404 p {
+    font-size: 1rem;
+    color: #777777;
+}
+
+
+/* 其他page fix */
+
+.login-box p {
+    padding-bottom: 5px
+}
+
+.error {
+    padding-top: 0px
+}
+
+.form {
+    margin-bottom: 6px;
+}
+
+.form2 {
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+
+.btn-green {
+    margin-top: 10px;
+}
+
+.container2 {
+    width: 600px;
+}
+
+.container .TaiwanGallery {
+    width: 245px;
+}
+
+.back {
+    color: #888
+}
+
+.back:hover {
+    color: #999
+}
+
+a {
+    color: #999
+}
+
+a:hover,
+:active {
+    color: #999
+}

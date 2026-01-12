@@ -1,0 +1,16 @@
+$(document).ready(function(){
+	$.ajax({
+	  url: 'ajaxPage/header.html',
+	  dataType: 'html',
+	  type: 'GET',
+	  cache : false,
+	  async : false,
+	  timeout: 3000,
+	  success: function(data) {
+	   $(".navBox").append(data);
+	  },
+	  error: function (xmlHttpRequest, error) {
+	  	alert('test');
+	  }
+	 });
+});

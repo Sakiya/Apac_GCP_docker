@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  # ==========================================
+  # 1. Nginx 反向代理 (開發版)
+  # ==========================================
+  nginx:
+    image: nginx:alpine
+    container_name: oat_nginx_dev # 名稱區隔
+    restart: always
+    # 開發版改用 Port 8080, 避免跟正式機 Port 80 衝突
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - web
+    networks:
+      - oat-network-dev
+
+  # ==========================================
+  # 2. Web 應用程式 (開發版)
+  # ==========================================
+  web:
+    build: .
+    container_name: oat_web_dev # 名稱區隔
+    restart: always
+    expose:
+      - "80"
+    volumes:
+      - .:/var/www/html
+      - ./logs/apache:/var/log/apache2
+      # [持久化] 使用者上傳檔案掛載
+      - ./uploads:/var/www/html/www/images/upload
+    environment:
+      # [注意] 開發版應該讀取 .env.dev (如果有的話)
+      # 這裡預設直接讀取當前環境變數，您可以在 CI/CD 中覆蓋這些值
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - YII_DEBUG=true # 強制開啟 Debug
+      - YII_TRACE_LEVEL=3
+      - GII_PASSWORD=${GII_PASSWORD}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+    depends_on:
+      - db
+    networks:
+      - oat-network-dev
+
+  # ==========================================
+  # 3. 資料庫服務 (開發版)
+  # ==========================================
+  db:
+    image: mariadb:10.11
+    container_name: oat_db_dev # 名稱區隔
+    restart: always
+    # 開發版改用 Port 3308
+    ports:
+      - "3308:3306"
+    environment:
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+    volumes:
+      # 使用獨立的 Volume，避免汙染正式機資料
+      - db_data_dev:/var/lib/mysql
+      - ./juso1326_ota.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./logs/mysql:/var/log/mysql
+    networks:
+      - oat-network-dev
+
+networks:
+  oat-network-dev:
+    driver: bridge
+
+volumes:
+  db_data_dev:
