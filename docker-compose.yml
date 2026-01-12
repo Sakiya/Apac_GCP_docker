@@ -11,11 +11,14 @@ services:
     # 對外開放 Port 80
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       # 掛載設定檔
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       # 掛載 Log 資料夾 (資安稽核用)
       - ./logs/nginx:/var/log/nginx
+      # SSL 憑證 (Cloudflare Origin CA)
+      - ./nginx/certs:/etc/nginx/certs
     depends_on:
       - web
     networks:

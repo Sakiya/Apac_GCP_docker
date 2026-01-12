@@ -46,24 +46,53 @@ function stop_services() {
 
 function clear_cache() {
     echo -e "${YELLOW}正在清除 Yii Assets 與 Runtime 快取...${NC}"
+    read -p "❓ 確定要清除快取嗎？ (y/n): " confirm
+    if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
+        echo "操作已取消。"
+        return
+    fi
     rm -rf www/assets/* && touch www/assets/.gitkeep
     rm -rf www/protected/runtime/* && touch www/protected/runtime/.gitkeep
-    echo -e "${GREEN}快取已清除！${NC}"
+    echo -e "${GREEN}✅ 快取已清除！${NC}"
 }
 
 function backup_uploads() {
-    FILENAME="uploads_backup_$(date +%Y%m%d_%H%M%S).tar.gz"
-    echo -e "${GREEN}正在備份 uploads 資料夾至 ${FILENAME}...${NC}"
-    tar -zcvf "$FILENAME" ./uploads
-    echo -e "${GREEN}備份完成: $FILENAME${NC}"
+    TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+    FILENAME="uploads_backup_${TIMESTAMP}.zip"
+    ABS_PATH="$(pwd)/$FILENAME"
+    
+    echo -e "${GREEN}📦 正在備份 uploads 資料夾至 ${FILENAME}...${NC}"
+    
+    # Check if zip is installed
+    if ! command -v zip &> /dev/null; then
+        echo -e "${RED}錯誤: 找不到 'zip' 指令，請先安裝 zip (例如: apt-get install zip)${NC}"
+        return
+    fi
+
+    zip -r "$FILENAME" ./uploads
+    
+    echo -e "${GREEN}✅ 備份完成！${NC}"
+    echo -e "${CYAN}📁 檔案路徑: ${ABS_PATH}${NC}"
+    echo -e "${YELLOW}⬇️  若您在遠端伺服器，可使用以下指令下載:${NC}"
+    echo -e "   scp <user>@<server-ip>:${ABS_PATH} ./"
 }
 
 function clean_uploads() {
-    echo -e "${RED}⚠️  警告：這將刪除 uploads 資料夾下的所有檔案！${NC}"
+    echo -e "${RED}⚠️  危險警告：這將永久刪除 uploads 資料夾下的所有檔案！${NC}"
+    echo -e "${RED}此操作無法復原！${NC}"
     read -p "您確定要繼續嗎？請輸入 'yes' 確認: " confirm
     if [[ "$confirm" == "yes" ]]; then
-        rm -rf ./uploads/*
-        echo -e "${GREEN}Uploads 資料夾已清空。${NC}"
+        echo -e "${RED}再次確認...${NC}"
+        read -p "真的確定嗎？ (輸入 'delete' 執行): " double_confirm
+        if [[ "$double_confirm" == "delete" ]]; then
+            rm -rf ./uploads/*
+            # Recreate empty uploads dir if deleted entirely, or just files? 
+            # Usually safe to keep the dir
+            mkdir -p ./uploads
+            echo -e "${GREEN}🗑️  Uploads 資料夾已清空。${NC}"
+        else
+            echo "操作已取消。"
+        fi
     else
         echo "操作已取消。"
     fi
