@@ -29,7 +29,7 @@ function start_services() {
     echo -e "${GREEN}正在啟動服務...${NC}"
     # 確保 docker-compose 在 PATH 中 (針對某些 GUI 環境)
     export PATH=$PATH:/usr/local/bin
-    docker-compose up -d --build
+    docker-compose -f docker-compose.yml -f docker-compose.monitor.yml up -d --build
     if [ $? -eq 0 ]; then
         echo -e "${GREEN}服務已啟動！${NC}"
     else
@@ -40,7 +40,7 @@ function start_services() {
 function stop_services() {
     echo -e "${YELLOW}正在停止服務...${NC}"
     export PATH=$PATH:/usr/local/bin
-    docker-compose down
+    docker-compose -f docker-compose.yml -f docker-compose.monitor.yml down
     echo -e "${GREEN}服務已停止。${NC}"
 }
 

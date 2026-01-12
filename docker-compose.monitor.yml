@@ -20,7 +20,3 @@ volumes:
   portainer_data:
 
 
-networks:
-  oat-network:
-    external: true
-    name: oat_docker_oat-network
