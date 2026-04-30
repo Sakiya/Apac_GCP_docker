@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
       # ── SonarQube 掃描（Dependabot PR 無法取得 Secrets，跳過）──────────────
-      - uses: SonarSource/sonarqube-scan-action@v6
+      - uses: SonarSource/sonarqube-scan-action@v8
         if: github.actor != 'dependabot[bot]'
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
