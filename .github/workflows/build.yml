@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -13,6 +16,7 @@ jobs:
     permissions:
       contents: write        # Dependency Submission API 需要寫入權限
       security-events: write
+      pull-requests: write   # SonarQube 在 PR 上寫入分析結果
 
     steps:
       - uses: actions/checkout@v4
@@ -25,8 +29,16 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
-      # ── SBOM：掃描整個 repo（含 composer.json / PHP 套件）─────────────────
+      # ── Quality Gate：掃描結果不通過則阻止 Merge ────────────────────────────
+      - name: SonarQube Quality Gate check
+        uses: SonarSource/sonarqube-quality-gate-action@v1
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      # ── SBOM：以下只在 push main 時執行（PR 不需要提交相依性圖）────────────
       - name: Generate SBOM from repository source
+        if: github.event_name == 'push'
         uses: anchore/sbom-action@v0.24.0
         with:
           path: .
@@ -35,15 +47,17 @@ jobs:
           format: spdx-json
 
       - name: Submit repo SBOM to GitHub Dependency Graph
+        if: github.event_name == 'push'
         uses: advanced-security/spdx-dependency-submission-action@v0.2.0
         with:
           filePath: /tmp/sbom-repo.spdx.json
 
-      # ── SBOM：Docker Image 掃描（OS apt 套件 + PHP 擴充）──────────────────
       - name: Build Docker image for SBOM scan
+        if: github.event_name == 'push'
         run: docker build -t apac-app:${{ github.sha }} .
 
       - name: Generate SBOM from Docker image
+        if: github.event_name == 'push'
         uses: anchore/sbom-action@v0.24.0
         with:
           image: apac-app:${{ github.sha }}
@@ -52,6 +66,7 @@ jobs:
           format: spdx-json
 
       - name: Submit Docker SBOM to GitHub Dependency Graph
+        if: github.event_name == 'push'
         uses: advanced-security/spdx-dependency-submission-action@v0.2.0
         with:
           filePath: /tmp/sbom-docker.spdx.json
