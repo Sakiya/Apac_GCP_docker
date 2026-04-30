@@ -23,14 +23,16 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
-      # ── SonarQube 掃描 ──────────────────────────────────────────────────────
+      # ── SonarQube 掃描（Dependabot PR 無法取得 Secrets，跳過）──────────────
       - uses: SonarSource/sonarqube-scan-action@v6
+        if: github.actor != 'dependabot[bot]'
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
       # ── Quality Gate：掃描結果不通過則阻止 Merge ────────────────────────────
       - name: SonarQube Quality Gate check
+        if: github.actor != 'dependabot[bot]'
         uses: SonarSource/sonarqube-quality-gate-action@v1
         timeout-minutes: 5
         env:
