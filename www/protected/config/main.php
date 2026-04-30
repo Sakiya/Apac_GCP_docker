@@ -61,26 +61,7 @@ return array(
 				'<language:(zh|en)>/<controller:\w+>/<action:\w+>'=>'<controller>/<action>'
 			),
 		),
-		/*
-		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=juso1326_ota',
-			'emulatePrepare' => true,
-			'username' => 'juso1326_work',
-			'password' => '4a0zZvV-bnk+',
-			'charset' => 'utf8',
-			'tablePrefix' => 'zx_', //表格前綴詞
-		),
-		*/
-		
-		// 'db'=>array(
-		// 	'connectionString' => 'mysql:host=localhost;dbname=onearttaipei',
-		// 	'emulatePrepare' => true,
-		// 	'username' => 'root',
-		// 	'password' => 'root',
-		// 	'charset' => 'utf8',
-		// 	'tablePrefix' => 'zx_', //表格前綴詞
-		// ),
-		'db'=>array(
+'db'=>array(
             'charset' => 'utf8mb4',
 			'connectionString' => 'mysql:host=' . (getenv('DB_HOST') ?: 'localhost') . ';dbname=' . (getenv('DB_NAME') ?: 'juso1326_ota'),
 			'emulatePrepare' => true,
