@@ -100,12 +100,12 @@ function clean_uploads() {
 
 function view_logs() {
     echo "選擇要查看的 Log:"
-    echo "1. Nginx"
+    echo "1. Caddy"
     echo "2. Apache/PHP"
     echo "3. MariaDB"
     read -p "請選擇 [1-3]: " log_choice
     case $log_choice in
-        1) tail -f logs/nginx/error.log ;;
+        1) tail -f logs/caddy/oat_web.log ;;
         2) tail -f logs/apache/error.log ;;
         3) tail -f logs/mysql/error.log ;;
         *) echo "無效的選擇" ;;

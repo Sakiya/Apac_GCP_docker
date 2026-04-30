@@ -2,23 +2,26 @@ version: '3.8'
 
 services:
   # ==========================================
-  # 1. Nginx 反向代理服務 (入口)
+  # 1. Caddy 反向代理服務 (取代 Nginx)
   # ==========================================
-  nginx:
-    image: nginx:alpine
-    container_name: oat_nginx
+  caddy:
+    image: caddy:2-alpine
+    container_name: oat_caddy
     restart: always # [自動啟動] VM 重開機後自動執行
-    # 對外開放 Port 80
+    # 對外開放 Port 80 與 443
     ports:
       - "80:80"
       - "443:443"
     volumes:
       # 掛載設定檔
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./Caddyfile:/etc/caddy/Caddyfile
       # 掛載 Log 資料夾 (資安稽核用)
-      - ./logs/nginx:/var/log/nginx
+      - ./logs/caddy:/var/log/caddy
       # SSL 憑證 (Cloudflare Origin CA)
-      - ./nginx/certs:/etc/nginx/certs
+      - ./nginx/certs:/etc/caddy/certs
+      # Caddy 內部參數持久化
+      - caddy_data:/data
+      - caddy_config:/config
     depends_on:
       - web
     networks:
@@ -97,3 +100,5 @@ networks:
 
 volumes:
   db_data:
+  caddy_data:
+  caddy_config:

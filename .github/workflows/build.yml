@@ -1,0 +1,57 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build and analyze
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write        # Dependency Submission API 需要寫入權限
+      security-events: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
+      # ── SonarQube 掃描 ──────────────────────────────────────────────────────
+      - uses: SonarSource/sonarqube-scan-action@v6
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+      # ── SBOM：掃描整個 repo（含 composer.json / PHP 套件）─────────────────
+      - name: Generate SBOM from repository source
+        uses: anchore/sbom-action@v0.24.0
+        with:
+          path: .
+          artifact-name: sbom-repo.spdx.json
+          output-file: /tmp/sbom-repo.spdx.json
+          format: spdx-json
+
+      - name: Submit repo SBOM to GitHub Dependency Graph
+        uses: advanced-security/spdx-dependency-submission-action@v0.2.0
+        with:
+          filePath: /tmp/sbom-repo.spdx.json
+
+      # ── SBOM：Docker Image 掃描（OS apt 套件 + PHP 擴充）──────────────────
+      - name: Build Docker image for SBOM scan
+        run: docker build -t apac-app:${{ github.sha }} .
+
+      - name: Generate SBOM from Docker image
+        uses: anchore/sbom-action@v0.24.0
+        with:
+          image: apac-app:${{ github.sha }}
+          artifact-name: sbom-docker.spdx.json
+          output-file: /tmp/sbom-docker.spdx.json
+          format: spdx-json
+
+      - name: Submit Docker SBOM to GitHub Dependency Graph
+        uses: advanced-security/spdx-dependency-submission-action@v0.2.0
+        with:
+          filePath: /tmp/sbom-docker.spdx.json
