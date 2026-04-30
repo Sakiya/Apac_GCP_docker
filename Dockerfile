@@ -1,5 +1,5 @@
 # 使用官方 PHP 8.1 搭配 Apache 的映像檔
-FROM php:8.1-apache
+FROM php:8.5-apache
 
 # [安裝依賴] 更新套件列表並安裝必要的系統工具與函式庫
 # libpng, libjpeg, libfreetype 用於圖片處理 (GD 庫)
