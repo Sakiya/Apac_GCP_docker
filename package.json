@@ -14,7 +14,7 @@
     "canvas2image": "^1.0.5",
     "imagesloaded": "^4.1.4",
     "modernizr": "^2.8.3",
-    "sweetalert": "^1.1.3",
+    "sweetalert": "^2.1.2",
     "background-blur": "^0.1.3",
     "//_B_BACKEND_ADMIN_SCRIPT": "=== B：後端用套件 (www/admin/script) ===",
     "jquery": "2.1.1",
