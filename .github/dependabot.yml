@@ -15,3 +15,31 @@ updates:
       interval: "weekly"
     labels:
       - "dependencies"
+
+  # 前端 Javascript 套件 (NPM) 自動更新
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+    # 🌟 避免前端大版本升級導致畫面版面崩潰 (如 jQuery 1.x/2.x 升級 3.x，或 Bootstrap 3 升至 4/5)
+    ignore:
+      - dependency-name: "jquery"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "jquery-ui"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "bootstrap"
+        update-types: ["version-update:semver-major"]
+
+  # 後端 PHP / Yii 套件 (Composer) 自動更新
+  - package-ecosystem: "composer"
+    directory: "/yii"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+    # 🌟 避免 Yii 框架大版本升級 (Yii 1.1 絕對不能升級至 Yii 2.0)
+    ignore:
+      - dependency-name: "yiisoft/yii"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
