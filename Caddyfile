@@ -38,7 +38,7 @@ https://registration.onearttaipei.com {
 # ---------------------------------------------------------
 # 2. 網站 HTTP (本地端開發或內部測試)
 # ---------------------------------------------------------
-http://registration.onearttaipei.com, http://localhost {
+http://registration.onearttaipei.com, http://localhost, http://localhost:3005 {
     log {
         output file /var/log/caddy/oat_web.log
     }

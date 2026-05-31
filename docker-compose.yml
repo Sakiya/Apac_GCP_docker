@@ -10,7 +10,7 @@ services:
     restart: always # [自動啟動] VM 重開機後自動執行
     # 對外開放 Port 80 與 443
     ports:
-      - "80:80"
+      - "3005:80"
       - "443:443"
     volumes:
       # 掛載設定檔
