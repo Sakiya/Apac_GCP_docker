@@ -1,0 +1,23 @@
+# Gitleaks 預防性路徑排除設定
+
+[allowlist]
+description = "排除不需要掃描的靜態檔案與第三方套件資料夾"
+
+paths = [
+    # 排除大檔案與檢測報告
+    '''sonar_bugs\.json''',
+    '''package-lock\.json''',
+    
+    # 排除框架與擴充套件
+    '''^yii/''',
+    '''www/protected/extensions/''',
+    
+    # 排除上傳與日誌資料夾
+    '''^uploads/''',
+    '''^logs/''',
+    
+    # 排除專案資源與備份
+    '''\.zip$''',
+    '''\.7z$''',
+    '''\.sql$'''
+]
