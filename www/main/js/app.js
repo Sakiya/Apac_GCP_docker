@@ -103,14 +103,11 @@ $(document).ready(function() {
     });
 });
 $(".delete-img").hide();
-$(".zh .delete-img").click(function() {
+$(".zh .delete-img, .en .delete-img").click(function() {
     $(this).parents(".upload").siblings().css("background-image", "").siblings().attr("value", "");
-    $(this).siblings().find(".file-upload-text").text("上傳照片");
-    $(this).hide();
-});
-$(".en .delete-img").click(function() {
-    $(this).parents(".upload").siblings().css("background-image", "").siblings().attr("value", "");
-    $(this).siblings().find(".file-upload-text").text("Upload Image");
+    const isZh = $(this).closest(".zh").length > 0 || $("body").hasClass("zh");
+    const text = isZh ? "上傳照片" : "Upload Image";
+    $(this).siblings().find(".file-upload-text").text(text);
     $(this).hide();
 });
 function dropifyFiles(){
@@ -146,21 +143,14 @@ function dropifyFiles(){
             }
         },
         listenInput: function() {
-            $(".zh .file-upload-native").on("change", function() {
+            $(".zh .file-upload-native, .en .file-upload-native").on("change", function() {
                 const fileSizeMb = this.files[0].size / 1024 / 1024;
                 const fileType = this.files[0].type;
                 if (fileSizeMb <= 1 && (fileType === 'image/jpg' || fileType === 'image/jpeg' || fileType === 'image/png')){
                     handler.setPreviewImg(this);
-                    $(this).siblings(".file-upload-text").text("重新上傳照片");
-                    $(this).parents(".upload").find(".delete-img").show();
-                }
-            });
-            $(".en .file-upload-native").on("change", function() {
-                const fileSizeMb = this.files[0].size / 1024 / 1024;
-                const fileType = this.files[0].type;
-                if (fileSizeMb <= 1 && (fileType === 'image/jpg' || fileType === 'image/jpeg' || fileType === 'image/png')){
-                    handler.setPreviewImg(this);
-                    $(this).siblings(".file-upload-text").text("Change Image");
+                    const isZh = $(this).closest(".zh").length > 0 || $("body").hasClass("zh");
+                    const text = isZh ? "重新上傳照片" : "Change Image";
+                    $(this).siblings(".file-upload-text").text(text);
                     $(this).parents(".upload").find(".delete-img").show();
                 }
             });
