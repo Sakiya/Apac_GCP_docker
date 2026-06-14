@@ -32,6 +32,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # ── SonarQube 快取機制（加速後續掃描）────────────────────────────
+      - name: Cache SonarQube packages
+        if: github.actor != 'dependabot[bot]'
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
       # ── SonarQube 掃描（Dependabot PR 無法取得 Secrets，跳過）──────────────
       - uses: SonarSource/sonarqube-scan-action@v6
         if: github.actor != 'dependabot[bot]'
@@ -56,6 +65,7 @@ jobs:
           artifact-name: sbom-repo.spdx.json
           output-file: /tmp/sbom-repo.spdx.json
           format: spdx-json
+          args: --exclude '**/*.zip' --exclude '**/yii/**'
 
       - name: Submit repo SBOM to GitHub Dependency Graph
         if: github.event_name == 'push'
