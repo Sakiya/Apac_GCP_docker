@@ -42,7 +42,7 @@ jobs:
       # ── Quality Gate：掃描結果不通過則阻止 Merge ────────────────────────────
       - name: SonarQube Quality Gate check
         if: github.actor != 'dependabot[bot]'
-        uses: SonarSource/sonarqube-quality-gate-action@v2
+        uses: SonarSource/sonarqube-quality-gate-action@v1
         timeout-minutes: 5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
