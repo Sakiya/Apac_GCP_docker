@@ -32,14 +32,4 @@ updates:
       - dependency-name: "bootstrap"
         update-types: ["version-update:semver-major"]
 
-  # 後端 PHP / Yii 套件 (Composer) 自動更新
-  - package-ecosystem: "composer"
-    directory: "/yii"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-    # 🌟 避免 Yii 框架大版本升級 (Yii 1.1 絕對不能升級至 Yii 2.0)
-    ignore:
-      - dependency-name: "yiisoft/yii"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+
